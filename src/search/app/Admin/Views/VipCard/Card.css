@@ -1,0 +1,48 @@
+.VipCard.cell {
+    font-size: 17px;
+}
+
+.VipCard.cell .value {
+    margin-left: 38px;
+    color: #ffa940;
+}
+
+.card-header {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.title-b {
+    width: 100%;
+}
+
+.vip {
+    width: 100%;
+    text-align: center;
+}
+.yes{
+    color: red;
+}
+.no{
+    color: #333;
+}
+
+.realname {
+    font-size: 8px;
+}
+
+.add-btn {
+    margin-top: 5px;
+    padding: 5px;
+    color: white;
+   
+    border-radius: 5px;
+}
+.add-btn.add{
+    background-color: red;
+}
+.add-btn.cancel{
+    background-color: #666;
+}
