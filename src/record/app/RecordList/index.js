@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import { Card, WhiteSpace, List } from 'antd-mobile'
-import { timeMaker } from 'utils'
+import React, { Component } from "react";
+import { Card, WhiteSpace, List } from "antd-mobile";
+import { timeMaker } from "utils";
 
 export class RecordList extends Component {
   componentDidMount() {
-    this.props.dispatch({ type: 'fetchRecord' })
+    this.props.dispatch({ type: "fetchRecord" });
   }
 
   renderList = () => {
-    if (this.props.CardList === void 666) return
+    if (this.props.CardList === void 666) return;
     const newList = this.props.CardList.filter((child, index) => {
-      const { date } = child
+      const { date } = child;
       if (dateSelector(this.props.date, date)) {
-        return child
+        return child;
       }
-      return null
-    })
+      return null;
+    });
 
     const lastList = newList.map((child, index) => {
-      const { username, avatarUrl, date, end, phone, start, trainer } = child
-      const timeString = timeMaker()
+      const { username, avatarUrl, date, end, phone, start, trainer } = child;
+      const timeString = timeMaker();
       if (dateSelector(this.props.date, date)) {
         return (
           <div key={index}>
@@ -38,26 +38,30 @@ export class RecordList extends Component {
                 content={date}
                 extra={
                   <div>
-                    {timeString[parseInt(start, 10)]}~{timeString[parseInt(end, 10)]}
+                    {timeString[parseInt(start, 10)]}~{
+                      timeString[parseInt(end, 10)]
+                    }
                   </div>
                 }
               />
             </Card>
           </div>
-        )
+        );
       }
-      return child
-    })
+      return child;
+    });
     return (
       <div>
-        {lastList.length > 0 ? <List.Item>本月约课次数：{lastList.length}</List.Item> : null}
+        {lastList.length > 0 ? (
+          <List.Item>本月约课次数：{lastList.length}</List.Item>
+        ) : null}
         {lastList}
       </div>
-    )
-  }
+    );
+  };
 
   render() {
-    return <div>{this.renderList()}</div>
+    return <div>{this.renderList()}</div>;
   }
 }
 
@@ -67,12 +71,27 @@ export class RecordList extends Component {
  * @param {*} recordDate
  */
 export function dateSelector(choose, recordDate) {
-  if (!choose || !recordDate) return
-  const splitedChoose = choose.split('.')
-  const splitedRecordDate = recordDate.split('.')
+  if (!choose || !recordDate) return;
 
-  if (splitedChoose[0] + splitedChoose[1] === splitedRecordDate[0] + splitedRecordDate[1]) {
-    return true
+  const splitedChoose = choose.split(".");
+  const splitedRecordDate = recordDate.split(".");
+  // console.log(splitedRecordDate[0]);
+
+  if (
+    splitedChoose[0] + (parseInt(splitedChoose[1]) + 1) ===
+    splitedRecordDate[0] + splitedRecordDate[1]
+  ) {
+    console.log(splitedRecordDate[2]);
+
+    return parseInt(splitedRecordDate[2]) < 9;
   }
-  return false
+
+  if (
+    splitedChoose[0] + splitedChoose[1] ===
+    splitedRecordDate[0] + splitedRecordDate[1]
+  ) {
+    return parseInt(splitedRecordDate[2]) > 9;
+  }
+
+  return false;
 }
