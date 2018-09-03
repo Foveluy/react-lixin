@@ -18,7 +18,18 @@ export class RecordList extends Component {
     });
 
     const lastList = newList.map((child, index) => {
-      const { username, avatarUrl, date, end, phone, start, trainer } = child;
+      const {
+        username,
+        avatarUrl,
+        date,
+        end,
+        phone,
+        start,
+        trainer,
+        credit,
+        unitPrice,
+        tuanMoney
+      } = child;
       const timeString = timeMaker();
       if (dateSelector(this.props.date, date)) {
         return (
@@ -33,6 +44,9 @@ export class RecordList extends Component {
               />
               <Card.Body>
                 <div>会员电话：{phone}</div>
+                <div>私教课时：{credit}</div>
+                <div>团课课时：{tuanMoney}</div>
+                <div>售课单价：{unitPrice}</div>
               </Card.Body>
               <Card.Footer
                 content={date}
